@@ -1,0 +1,26 @@
+﻿<EditForm Model="@ListTransaction" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <div>
+            <label>Название</label>
+            <div>
+                <InputText @bind-Value="@ListTransaction.Name" />
+                <ValidationMessage For="@(() => ListTransaction.Name)" />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-@ButtonStyle">
+        @ButtonText
+    </button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public ListTransactionModel ListTransaction { get; set; }
+    [Parameter]
+    public string ButtonText { get; set; } = "Save Changes";
+    [Parameter]
+    public string ButtonStyle { get; set; } = "info";
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+}

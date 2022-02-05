@@ -1,0 +1,140 @@
+2022-02-05 14:55:12.603 +03:00 [INF] Entity Framework Core 5.0.13 initialized 'BudjetDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Budjet.WebApi 
+2022-02-05 14:55:13.063 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-02-05 14:55:13.084 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-02-05 14:55:13.086 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-02-05 14:55:13.087 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2022-02-05 14:55:13.101 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2022-02-05 14:55:13.113 +03:00 [INF] No migrations were applied. The database is already up to date.
+2022-02-05 14:55:13.376 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-02-05 14:55:13.377 +03:00 [INF] Hosting environment: Development
+2022-02-05 14:55:13.378 +03:00 [INF] Content root path: C:\Users\maxem\OneDrive\Рабочий стол\task13-dev\Budjet.WebApi
+2022-02-05 14:55:13.397 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44373/api/ListTransaction/508a5819-6b57-481c-a997-583d4060bea1 - -
+2022-02-05 14:55:13.463 +03:00 [INF] Executing endpoint 'Budjet.WebApi.Controllers.ListTransactionController.GetAll (Budjet.WebApi)'
+2022-02-05 14:55:13.488 +03:00 [INF] Route matched with {action = "GetAll", controller = "ListTransaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Budjet.Application.Budjet.Queries.GetAllListTransaction.AllListTransactionVm]] GetAll(System.Guid) on controller Budjet.WebApi.Controllers.ListTransactionController (Budjet.WebApi).
+2022-02-05 14:55:13.653 +03:00 [INF] Entity Framework Core 5.0.13 initialized 'BudjetDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Budjet.WebApi 
+2022-02-05 14:55:13.849 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'
+2022-02-05 14:55:13.934 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[@__request_UserId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[DateCreated], [l].[ListTransactionId], [l].[Name], [t0].[DateCreated], [t0].[Name], [t0].[TransactionId], [t0].[TypeTransaction], [t0].[Value], [t2].[DateCreated], [t2].[Name], [t2].[TransactionId], [t2].[TypeTransaction], [t2].[Value]
+FROM [ListTransactions] AS [l]
+LEFT JOIN (
+    SELECT [t].[DateCreated], [t].[Name], [t].[TransactionId], [t].[TypeTransaction], [t].[Value], [t].[ListTransactionId]
+    FROM [Transactions] AS [t]
+    WHERE [t].[TypeTransaction] = N'expenses'
+) AS [t0] ON [l].[ListTransactionId] = [t0].[ListTransactionId]
+LEFT JOIN (
+    SELECT [t1].[DateCreated], [t1].[Name], [t1].[TransactionId], [t1].[TypeTransaction], [t1].[Value], [t1].[ListTransactionId]
+    FROM [Transactions] AS [t1]
+    WHERE [t1].[TypeTransaction] = N'income'
+) AS [t2] ON [l].[ListTransactionId] = [t2].[ListTransactionId]
+WHERE [l].[UserId] = @__request_UserId_0
+ORDER BY [l].[ListTransactionId], [t0].[TransactionId], [t2].[TransactionId]
+2022-02-05 14:55:13.956 +03:00 [INF] Executing OkObjectResult, writing value of type 'Budjet.Application.Budjet.Queries.GetAllListTransaction.AllListTransactionVm'.
+2022-02-05 14:55:14.064 +03:00 [INF] Executed action Budjet.WebApi.Controllers.ListTransactionController.GetAll (Budjet.WebApi) in 573.0585ms
+2022-02-05 14:55:14.065 +03:00 [INF] Executed endpoint 'Budjet.WebApi.Controllers.ListTransactionController.GetAll (Budjet.WebApi)'
+2022-02-05 14:55:14.071 +03:00 [INF] Request finished HTTP/1.1 GET https://localhost:44373/api/ListTransaction/508a5819-6b57-481c-a997-583d4060bea1 - - - 200 473 application/json;+charset=utf-8 674.8385ms
+2022-02-05 14:55:14.320 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44373/api/ListTransaction/508a5819-6b57-481c-a997-583d4060bea1 - -
+2022-02-05 14:55:14.322 +03:00 [INF] Executing endpoint 'Budjet.WebApi.Controllers.ListTransactionController.GetAll (Budjet.WebApi)'
+2022-02-05 14:55:14.325 +03:00 [INF] Route matched with {action = "GetAll", controller = "ListTransaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Budjet.Application.Budjet.Queries.GetAllListTransaction.AllListTransactionVm]] GetAll(System.Guid) on controller Budjet.WebApi.Controllers.ListTransactionController (Budjet.WebApi).
+2022-02-05 14:55:14.347 +03:00 [INF] Entity Framework Core 5.0.13 initialized 'BudjetDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Budjet.WebApi 
+2022-02-05 14:55:14.351 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__request_UserId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[DateCreated], [l].[ListTransactionId], [l].[Name], [t0].[DateCreated], [t0].[Name], [t0].[TransactionId], [t0].[TypeTransaction], [t0].[Value], [t2].[DateCreated], [t2].[Name], [t2].[TransactionId], [t2].[TypeTransaction], [t2].[Value]
+FROM [ListTransactions] AS [l]
+LEFT JOIN (
+    SELECT [t].[DateCreated], [t].[Name], [t].[TransactionId], [t].[TypeTransaction], [t].[Value], [t].[ListTransactionId]
+    FROM [Transactions] AS [t]
+    WHERE [t].[TypeTransaction] = N'expenses'
+) AS [t0] ON [l].[ListTransactionId] = [t0].[ListTransactionId]
+LEFT JOIN (
+    SELECT [t1].[DateCreated], [t1].[Name], [t1].[TransactionId], [t1].[TypeTransaction], [t1].[Value], [t1].[ListTransactionId]
+    FROM [Transactions] AS [t1]
+    WHERE [t1].[TypeTransaction] = N'income'
+) AS [t2] ON [l].[ListTransactionId] = [t2].[ListTransactionId]
+WHERE [l].[UserId] = @__request_UserId_0
+ORDER BY [l].[ListTransactionId], [t0].[TransactionId], [t2].[TransactionId]
+2022-02-05 14:55:14.353 +03:00 [INF] Executing OkObjectResult, writing value of type 'Budjet.Application.Budjet.Queries.GetAllListTransaction.AllListTransactionVm'.
+2022-02-05 14:55:14.354 +03:00 [INF] Executed action Budjet.WebApi.Controllers.ListTransactionController.GetAll (Budjet.WebApi) in 28.6472ms
+2022-02-05 14:55:14.354 +03:00 [INF] Executed endpoint 'Budjet.WebApi.Controllers.ListTransactionController.GetAll (Budjet.WebApi)'
+2022-02-05 14:55:14.354 +03:00 [INF] Request finished HTTP/1.1 GET https://localhost:44373/api/ListTransaction/508a5819-6b57-481c-a997-583d4060bea1 - - - 200 473 application/json;+charset=utf-8 33.7387ms
+2022-02-05 14:55:16.669 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/02.05.2022 - -
+2022-02-05 14:55:16.670 +03:00 [INF] Executing endpoint 'Budjet.WebApi.Controllers.ResultController.GetOnDate (Budjet.WebApi)'
+2022-02-05 14:55:16.674 +03:00 [INF] Route matched with {action = "GetOnDate", controller = "Result"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Budjet.Application.Budjet.Queries.GetTransactionOnDate.TransactionOnDateVm]] GetOnDate(System.Guid, System.DateTime) on controller Budjet.WebApi.Controllers.ResultController (Budjet.WebApi).
+2022-02-05 14:55:16.696 +03:00 [INF] Entity Framework Core 5.0.13 initialized 'BudjetDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Budjet.WebApi 
+2022-02-05 14:55:16.706 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__request_OnDate_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[DateCreated], [t].[Name], [t].[TransactionId], [t].[TypeTransaction], [t].[Value]
+FROM [Transactions] AS [t]
+WHERE CONVERT(date, [t].[DateCreated]) = @__request_OnDate_Date_0
+2022-02-05 14:55:16.709 +03:00 [INF] Executing OkObjectResult, writing value of type 'Budjet.Application.Budjet.Queries.GetTransactionOnDate.TransactionOnDateVm'.
+2022-02-05 14:55:16.712 +03:00 [INF] Executed action Budjet.WebApi.Controllers.ResultController.GetOnDate (Budjet.WebApi) in 38.3944ms
+2022-02-05 14:55:16.712 +03:00 [INF] Executed endpoint 'Budjet.WebApi.Controllers.ResultController.GetOnDate (Budjet.WebApi)'
+2022-02-05 14:55:16.712 +03:00 [INF] Request finished HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/02.05.2022 - - - 200 59 application/json;+charset=utf-8 42.9653ms
+2022-02-05 14:55:17.661 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/02.04.2022/02.05.2022 - -
+2022-02-05 14:55:17.661 +03:00 [INF] Executing endpoint 'Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi)'
+2022-02-05 14:55:17.663 +03:00 [INF] Route matched with {action = "GetPerMonth", controller = "Result"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Budjet.Application.Budjet.Queries.GetTransactionOnDate.TransactionOnDateVm]] GetPerMonth(System.Guid, System.DateTime, System.DateTime) on controller Budjet.WebApi.Controllers.ResultController (Budjet.WebApi).
+2022-02-05 14:55:17.668 +03:00 [INF] Entity Framework Core 5.0.13 initialized 'BudjetDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Budjet.WebApi 
+2022-02-05 14:55:17.682 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__request_UserId_0='?' (DbType = Guid), @__request_StartDate_Date_1='?' (DbType = DateTime2), @__request_EndDate_Date_2='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[DateCreated], [t].[Name], [t].[TransactionId], [t].[TypeTransaction], [t].[Value]
+FROM [Transactions] AS [t]
+INNER JOIN [ListTransactions] AS [l] ON [t].[ListTransactionId] = [l].[ListTransactionId]
+WHERE ([l].[UserId] = @__request_UserId_0) AND ((CONVERT(date, [t].[DateCreated]) >= @__request_StartDate_Date_1) AND (CONVERT(date, [t].[DateCreated]) <= @__request_EndDate_Date_2))
+2022-02-05 14:55:17.683 +03:00 [INF] Executing OkObjectResult, writing value of type 'Budjet.Application.Budjet.Queries.GetTransactionsPerMonth.TransactionPerMonthVm'.
+2022-02-05 14:55:17.685 +03:00 [INF] Executed action Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi) in 21.3644ms
+2022-02-05 14:55:17.685 +03:00 [INF] Executed endpoint 'Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi)'
+2022-02-05 14:55:17.685 +03:00 [INF] Request finished HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/02.04.2022/02.05.2022 - - - 200 63 application/json;+charset=utf-8 24.3465ms
+2022-02-05 14:55:18.772 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/02.05.2022 - -
+2022-02-05 14:55:18.772 +03:00 [INF] Executing endpoint 'Budjet.WebApi.Controllers.ResultController.GetOnDate (Budjet.WebApi)'
+2022-02-05 14:55:18.772 +03:00 [INF] Route matched with {action = "GetOnDate", controller = "Result"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Budjet.Application.Budjet.Queries.GetTransactionOnDate.TransactionOnDateVm]] GetOnDate(System.Guid, System.DateTime) on controller Budjet.WebApi.Controllers.ResultController (Budjet.WebApi).
+2022-02-05 14:55:18.773 +03:00 [INF] Entity Framework Core 5.0.13 initialized 'BudjetDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Budjet.WebApi 
+2022-02-05 14:55:18.775 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__request_OnDate_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[DateCreated], [t].[Name], [t].[TransactionId], [t].[TypeTransaction], [t].[Value]
+FROM [Transactions] AS [t]
+WHERE CONVERT(date, [t].[DateCreated]) = @__request_OnDate_Date_0
+2022-02-05 14:55:18.777 +03:00 [INF] Executing OkObjectResult, writing value of type 'Budjet.Application.Budjet.Queries.GetTransactionOnDate.TransactionOnDateVm'.
+2022-02-05 14:55:18.778 +03:00 [INF] Executed action Budjet.WebApi.Controllers.ResultController.GetOnDate (Budjet.WebApi) in 5.6352ms
+2022-02-05 14:55:18.778 +03:00 [INF] Executed endpoint 'Budjet.WebApi.Controllers.ResultController.GetOnDate (Budjet.WebApi)'
+2022-02-05 14:55:18.778 +03:00 [INF] Request finished HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/02.05.2022 - - - 200 59 application/json;+charset=utf-8 6.4888ms
+2022-02-05 14:55:22.699 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/02.04.2022/02.05.2022 - -
+2022-02-05 14:55:22.699 +03:00 [INF] Executing endpoint 'Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi)'
+2022-02-05 14:55:22.699 +03:00 [INF] Route matched with {action = "GetPerMonth", controller = "Result"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Budjet.Application.Budjet.Queries.GetTransactionOnDate.TransactionOnDateVm]] GetPerMonth(System.Guid, System.DateTime, System.DateTime) on controller Budjet.WebApi.Controllers.ResultController (Budjet.WebApi).
+2022-02-05 14:55:22.700 +03:00 [INF] Entity Framework Core 5.0.13 initialized 'BudjetDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Budjet.WebApi 
+2022-02-05 14:55:22.702 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__request_UserId_0='?' (DbType = Guid), @__request_StartDate_Date_1='?' (DbType = DateTime2), @__request_EndDate_Date_2='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[DateCreated], [t].[Name], [t].[TransactionId], [t].[TypeTransaction], [t].[Value]
+FROM [Transactions] AS [t]
+INNER JOIN [ListTransactions] AS [l] ON [t].[ListTransactionId] = [l].[ListTransactionId]
+WHERE ([l].[UserId] = @__request_UserId_0) AND ((CONVERT(date, [t].[DateCreated]) >= @__request_StartDate_Date_1) AND (CONVERT(date, [t].[DateCreated]) <= @__request_EndDate_Date_2))
+2022-02-05 14:55:22.703 +03:00 [INF] Executing OkObjectResult, writing value of type 'Budjet.Application.Budjet.Queries.GetTransactionsPerMonth.TransactionPerMonthVm'.
+2022-02-05 14:55:22.704 +03:00 [INF] Executed action Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi) in 4.8488ms
+2022-02-05 14:55:22.704 +03:00 [INF] Executed endpoint 'Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi)'
+2022-02-05 14:55:22.704 +03:00 [INF] Request finished HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/02.04.2022/02.05.2022 - - - 200 63 application/json;+charset=utf-8 5.4768ms
+2022-02-05 14:55:28.805 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/01.31.2022/02.05.2022 - -
+2022-02-05 14:55:28.805 +03:00 [INF] Executing endpoint 'Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi)'
+2022-02-05 14:55:28.805 +03:00 [INF] Route matched with {action = "GetPerMonth", controller = "Result"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Budjet.Application.Budjet.Queries.GetTransactionOnDate.TransactionOnDateVm]] GetPerMonth(System.Guid, System.DateTime, System.DateTime) on controller Budjet.WebApi.Controllers.ResultController (Budjet.WebApi).
+2022-02-05 14:55:28.807 +03:00 [INF] Entity Framework Core 5.0.13 initialized 'BudjetDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Budjet.WebApi 
+2022-02-05 14:55:28.809 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__request_UserId_0='?' (DbType = Guid), @__request_StartDate_Date_1='?' (DbType = DateTime2), @__request_EndDate_Date_2='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[DateCreated], [t].[Name], [t].[TransactionId], [t].[TypeTransaction], [t].[Value]
+FROM [Transactions] AS [t]
+INNER JOIN [ListTransactions] AS [l] ON [t].[ListTransactionId] = [l].[ListTransactionId]
+WHERE ([l].[UserId] = @__request_UserId_0) AND ((CONVERT(date, [t].[DateCreated]) >= @__request_StartDate_Date_1) AND (CONVERT(date, [t].[DateCreated]) <= @__request_EndDate_Date_2))
+2022-02-05 14:55:28.813 +03:00 [INF] Executing OkObjectResult, writing value of type 'Budjet.Application.Budjet.Queries.GetTransactionsPerMonth.TransactionPerMonthVm'.
+2022-02-05 14:55:28.814 +03:00 [INF] Executed action Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi) in 8.5092ms
+2022-02-05 14:55:28.814 +03:00 [INF] Executed endpoint 'Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi)'
+2022-02-05 14:55:28.814 +03:00 [INF] Request finished HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/01.31.2022/02.05.2022 - - - 200 63 application/json;+charset=utf-8 9.0463ms
+2022-02-05 14:55:31.500 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/01.03.2022/02.05.2022 - -
+2022-02-05 14:55:31.501 +03:00 [INF] Executing endpoint 'Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi)'
+2022-02-05 14:55:31.501 +03:00 [INF] Route matched with {action = "GetPerMonth", controller = "Result"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Budjet.Application.Budjet.Queries.GetTransactionOnDate.TransactionOnDateVm]] GetPerMonth(System.Guid, System.DateTime, System.DateTime) on controller Budjet.WebApi.Controllers.ResultController (Budjet.WebApi).
+2022-02-05 14:55:31.501 +03:00 [INF] Entity Framework Core 5.0.13 initialized 'BudjetDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Budjet.WebApi 
+2022-02-05 14:55:31.503 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__request_UserId_0='?' (DbType = Guid), @__request_StartDate_Date_1='?' (DbType = DateTime2), @__request_EndDate_Date_2='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[DateCreated], [t].[Name], [t].[TransactionId], [t].[TypeTransaction], [t].[Value]
+FROM [Transactions] AS [t]
+INNER JOIN [ListTransactions] AS [l] ON [t].[ListTransactionId] = [l].[ListTransactionId]
+WHERE ([l].[UserId] = @__request_UserId_0) AND ((CONVERT(date, [t].[DateCreated]) >= @__request_StartDate_Date_1) AND (CONVERT(date, [t].[DateCreated]) <= @__request_EndDate_Date_2))
+2022-02-05 14:55:31.505 +03:00 [INF] Executing OkObjectResult, writing value of type 'Budjet.Application.Budjet.Queries.GetTransactionsPerMonth.TransactionPerMonthVm'.
+2022-02-05 14:55:31.508 +03:00 [INF] Executed action Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi) in 6.8139ms
+2022-02-05 14:55:31.508 +03:00 [INF] Executed endpoint 'Budjet.WebApi.Controllers.ResultController.GetPerMonth (Budjet.WebApi)'
+2022-02-05 14:55:31.508 +03:00 [INF] Request finished HTTP/1.1 GET https://localhost:44373/api/Result/508a5819-6b57-481c-a997-583d4060bea1/01.03.2022/02.05.2022 - - - 200 373 application/json;+charset=utf-8 7.3966ms

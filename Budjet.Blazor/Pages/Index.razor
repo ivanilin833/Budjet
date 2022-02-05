@@ -1,0 +1,80 @@
+﻿@page "/"
+@inject CRUDService CRUD
+
+<body>
+    <h2>Списки операций</h2>
+    @if (CRUD.allList.ListTransact.Count == 0)
+    {
+        <h3>У вас нет списков с операциями</h3>
+
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Дата</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var list in CRUD.allList.ListTransact)
+                {
+                    <tr>
+
+                        <td><a href="transaction/@list.ListTransactionId">@list.Name</a></td>
+                        <td>
+                            @list.DateCreated
+                        </td>
+                        <td>
+                            <a class="btn btn-info"
+                               href="editlisttransaction/@list.ListTransactionId">
+                                <i class="oi oi-pencil"></i>
+                            </a>
+                            <button class="btn btn-danger" @onclick="(() => Delete(list.ListTransactionId))" >
+
+                                <i class="oi oi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <a class="btn "
+       href="createlisttransaction">
+        Добавить список
+    </a>
+
+    @* 👇 Use the modal component *@
+    <Modal @bind-Open="IsModalOpened" >
+        <form method="dialog">
+            <p>
+                @CRUD.deleteMessage
+            </p>
+            <menu>
+                <button>OK</button>
+            </menu>
+        </form>
+    </Modal>
+
+</body>
+
+@code
+{
+    public bool IsModalOpened { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CRUD.GetAllListTransaction();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task Delete(Guid listTransactionid)
+    {
+        IsModalOpened = true;
+        await CRUD.DeleteListTransaction(listTransactionid);
+        await OnInitializedAsync();
+    }
+}

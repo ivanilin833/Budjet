@@ -1,0 +1,68 @@
+﻿<EditForm Model="@Result">
+
+    @if (@Result.ExpensesOnDate != 0 || Result.IncomeOnDate != 0)
+    {
+        <div class="form-group">
+            <h4>Доход за дату: @Result.IncomeOnDate</h4>
+            <h4>Расход за дату: @Result.ExpensesOnDate</h4>
+        </div>
+    }
+    else if (@Result.ExpensesPerMonth != 0 || Result.IncomePerMonth != 0)
+    {
+        <div class="form-group">
+            <h4>Доход за месяц: @Result.IncomePerMonth</h4>
+            <h4>Расход за месяц: @Result.ExpensesPerMonth</h4>
+        </div>
+    }
+    @if (Result.Transactions is null)
+    {
+
+    }
+    else
+    {
+        <h4>Транзакции</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Data</th>
+                    <th>Значение</th>
+                    <th>Тип</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var oper in Result.Transactions)
+                {
+                    <tr>
+                        <td>@oper.Name</td>
+                        <td>
+                            @oper.DateCreated
+                        </td>
+                        <td>@oper.Value</td>
+
+                        @if (oper.TypeTransaction == "income")
+                        {
+                            <td>
+                                Доход
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Расход
+                            </td>
+                        }
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+
+</EditForm>
+
+@code {
+    [Parameter]
+    public ResultModel Result { get; set; }
+}

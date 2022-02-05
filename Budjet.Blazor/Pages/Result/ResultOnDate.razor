@@ -1,0 +1,11 @@
+﻿@page "/resultondate"
+@inject ResultService Result
+
+<h1>Отчёт за дату</h1>
+<form>
+    <p>
+         <input type="date" @bind="@Result.date">
+    </p>
+</form>
+<h3 visibility: hidden> @Result.TransactionOnDate()</h3>
+<ResultDetail Result="@Result.result" />

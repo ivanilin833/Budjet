@@ -1,0 +1,19 @@
+﻿@page "/resultpermonth"
+@inject ResultService Result
+
+<h1>Отчёт за месяц</h1>
+<form>
+    <p>
+        <input type="date" @bind="@Result.dateStart">
+        <input type="date" @bind="@Result.dateEnd">
+        <h4>@Result.errorMessge</h4>
+    </p>
+</form>
+@if (Result.dateStart >= Result.dateEnd)
+{
+    <h5 style="color:red">Проверьте последовательность и правильность указанных дат. Вторая дата должна быть больше первой.</h5>
+}
+
+    <h3 visibility: hidden> @Result.TransactionPerMonth()</h3>
+
+<ResultDetail Result="@Result.result" />

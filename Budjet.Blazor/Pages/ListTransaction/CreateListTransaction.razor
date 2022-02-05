@@ -1,0 +1,15 @@
+﻿@page "/createlisttransaction"
+@inject CRUDService CRUD
+@inject NavigationManager navigation
+    <h3>Добавить список с операциями</h3>
+    <ListTransactionDetail ButtonText="Добавить"
+                           ListTransaction="@listTransaction"
+                           OnValidSubmit="@Create" />
+    @code {
+        private ListTransactionModel listTransaction = new ListTransactionModel();
+        private async Task Create()
+        {
+            await CRUD.CreateListTransaction(listTransaction);
+            navigation.NavigateTo("/");
+        }
+    }

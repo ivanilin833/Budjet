@@ -1,0 +1,28 @@
+﻿@page "/edittransaction/{listtransactionid}/{transactionId}"
+@using System.Linq;
+@inject NavigationManager navigation
+@inject CRUDService CRUD
+
+<h3>изменить операцию</h3>
+<TransactionDetail ButtonText="Изменить"
+                   Transaction="@CRUD.transaction"
+                   OnValidSubmit="@Update" />
+@code {
+    [Parameter]
+    public string ListTransactionId { get; set; }
+    [Parameter]
+    public string TransactionId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CRUD.GetTransaction(ListTransactionId, TransactionId);
+
+    await base.OnInitializedAsync();
+    }
+
+    private async Task Update()
+    {
+        await CRUD.EditTransaction(CRUD.transaction, ListTransactionId, TransactionId);
+        navigation.NavigateTo($"/transaction/{ListTransactionId}");
+    }
+}

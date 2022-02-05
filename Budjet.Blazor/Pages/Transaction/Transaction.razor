@@ -1,0 +1,114 @@
+﻿@page "/transaction/{listtransactionid}"
+@inject CRUDService CRUD
+@inject NavigationManager navigation
+
+@if (CRUD.listTransaction.Income.Count == 0 && CRUD.listTransaction.Expenses.Count == 0)
+{
+    <h3>У вас нет операций в этом списке</h3>
+}
+else 
+{
+    <h3>Доход</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Дата</th>
+                <th>Сумма</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var oper in CRUD.listTransaction.Income)
+            {
+                <tr>
+                    <td>@oper.Name</td>
+                    <td>
+                        @oper.DateCreated
+                    </td>
+                    <td>@oper.Value</td>
+                    <td>
+                        <a class="btn btn-info"
+                           href="edittransaction/@CRUD.listTransaction.ListTransactionId/@oper.TransactionId">
+                            <i class="oi oi-pencil"></i>
+                        </a>
+                        <button class="btn btn-danger" @onclick="(() => Delete(CRUD.listTransaction.ListTransactionId, oper.TransactionId))">
+
+                            <i class="oi oi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h3>Расходы</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Дата</th>
+                <th>Сумма</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var oper in CRUD.listTransaction.Expenses)
+            {
+                <tr>
+                    <td>@oper.TransactionId</td>
+                    <td>@oper.Name</td>
+                    <td>
+                        @oper.DateCreated
+                    </td>
+                    <td>@oper.Value</td>
+                    <td>
+                        <a class="btn btn-info"
+                           href="edittransaction/@CRUD.listTransaction.ListTransactionId/@oper.TransactionId">
+                            <i class="oi oi-pencil"></i>
+                        </a>
+                        <button class="btn btn-danger" @onclick="(() =>Delete(CRUD.listTransaction.ListTransactionId, oper.TransactionId))">
+
+                            <i class="oi oi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a class="btn "
+   href="createtransaction/income/@ListTransactionId">
+    Добавить доход
+</a>
+<a class="btn "
+   href="createtransaction/expenses/@ListTransactionId">
+    Добавить расход
+</a>
+<div>
+    <a class="btn "
+       href="/">
+        Вернуться на главную
+    </a>
+</div>
+
+@code
+{ 
+    [Parameter]
+    public string ListTransactionId { get; set; }
+
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await CRUD.GetListTransaction(ListTransactionId);
+        await base.OnInitializedAsync();
+    }
+
+    private async Task Delete(Guid listTransactionid, Guid transactionId)
+    {
+        await CRUD.DeleteTransaction(listTransactionid, transactionId);
+        await OnInitializedAsync();
+    }
+
+}

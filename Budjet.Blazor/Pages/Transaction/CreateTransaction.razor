@@ -1,0 +1,21 @@
+﻿@page "/createtransaction/{typetransaction}/{listtransactionid}"
+@inject CRUDService CRUD
+@inject NavigationManager navigation
+
+<h3>Добавить операцию</h3>
+<TransactionDetail ButtonText="Добавить"
+                       Transaction="@transaction"
+                       OnValidSubmit="@Create" />
+@code {
+    [Parameter]
+    public string ListTransactionId { get; set; }
+    [Parameter]
+    public string TypeTransaction { get; set; }
+
+    private TransactionModel transaction = new TransactionModel();
+    private async void Create()
+    {
+        await CRUD.CreateTransaction(transaction, ListTransactionId, TypeTransaction);
+        navigation.NavigateTo($"/transaction/{ListTransactionId}");
+    }
+}

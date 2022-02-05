@@ -1,0 +1,24 @@
+﻿@page "/editlisttransaction/{listtransactionid}"
+@inject NavigationManager navigation
+@inject CRUDService CRUD
+
+<h3>изменить список с операциями</h3>
+<ListTransactionDetail ButtonText="Изменить"
+                       ListTransaction="@CRUD.listTransaction"
+                       OnValidSubmit="@Update" />
+@code {
+    [Parameter]
+    public string ListTransactionId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CRUD.GetListTransaction(ListTransactionId);
+        await base.OnInitializedAsync();
+    }
+
+    private async Task Update()
+    {
+        await CRUD.EditListTransaction(CRUD.listTransaction, ListTransactionId);
+        navigation.NavigateTo("/");
+    }
+}

@@ -1,0 +1,30 @@
+﻿<EditForm Model="@Transaction" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <div>
+            <label>Название</label>
+            <div>
+                <InputText @bind-Value="@Transaction.Name" />
+                <ValidationMessage For="@(() => Transaction.Name)" />
+            </div>
+            <label>Сумма</label>
+            <div>
+                <InputNumber step="0.1" min="1" @bind-Value="@Transaction.Value" />
+                <ValidationMessage For="@(() => Transaction.Value)" />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-@ButtonStyle">
+        @ButtonText
+    </button>
+</EditForm>
+@code {
+    [Parameter]
+    public TransactionModel Transaction { get; set; }
+    [Parameter]
+    public string ButtonText { get; set; } = "Save Changes";
+    [Parameter]
+    public string ButtonStyle { get; set; } = "info";
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+}
